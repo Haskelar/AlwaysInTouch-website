@@ -29,7 +29,7 @@
     <h1>Polityka prywatności</h1>
     <p class="meta">
       <strong>Aplikacja</strong>: AlwaysInTouch (<code>pl.haskelar.alwaysintouch</code>)<br>
-      <strong>Ostatnia aktualizacja</strong>: 30 lipca 2026
+      <strong>Ostatnia aktualizacja</strong>: 19 sierpnia 2026
     </p>
 
     <div class="card tldr">
@@ -52,8 +52,17 @@
       <li>nazwa wyświetlana, którą sam podajesz przy pierwszym uruchomieniu,</li>
       <li>pinezki i notatki na mapie,</li>
       <li>wyniki gier,</li>
+      <li>rozmowy z Przewodnikiem — Twoje pytania, odpowiedzi i przycięte fragmenty
+      źródeł, na których zostały oparte,</li>
       <li>dziennik diagnostyczny (informacje techniczne o połączeniu — patrz §5).</li>
     </ul>
+    <p>Rozmowy z Przewodnikiem <strong>przeżywają wyjście z grupy</strong> — nie są
+    częścią sesji i zakończenie jej ich nie kasuje. Usuwasz je tak samo jak resztę:
+    odinstalowaniem aplikacji lub wyczyszczeniem jej danych.</p>
+    <p>Osobno, poza tą bazą, w katalogu aplikacji leżą <strong>pobrane przez Ciebie
+    materiały</strong>: mapy offline, paczki wiedzy Przewodnika i jego model.
+    To treść, którą pobierasz, a nie dane o Tobie — nie zawierają niczego, co
+    powstało z Twojego użycia aplikacji.</p>
     <p>Kopia zapasowa Androida jest dla tej aplikacji <strong>wyłączona</strong>
     (<code>allowBackup="false"</code>), więc dane te nie trafiają na Dysk Google.</p>
     <p>Odinstalowanie aplikacji usuwa je nieodwracalnie. Nie mamy ich kopii i nie jesteśmy
@@ -68,6 +77,12 @@
       <li>Twoją pozycję na mapie grupy, jeśli włączysz jej udostępnianie,</li>
       <li>pinezki i wyniki gier.</li>
     </ul>
+    <p><strong>Udostępnianie pozycji nie ma stanu domyślnego ani trybu ciągłego.</strong>
+    Każde udostępnienie jest osobną, jawną decyzją: wybierasz, jak często pozycja ma
+    być wysyłana i przez jaki czas — <strong>najdłużej cztery godziny</strong> — po czym
+    wygasa samo. Pozycje <strong>nie są zapisywane na żadnym urządzeniu</strong>: ani
+    Twoja u innych, ani cudze u Ciebie. Żyją w pamięci działającej aplikacji i znikają
+    razem z sesją.</p>
     <p>Ruch między urządzeniami jest szyfrowany. Nie przechodzi przez żaden serwer
     pośredniczący ani przez internet — odbywa się w obrębie sieci lokalnej lub łącza
     Bluetooth.</p>
@@ -112,8 +127,14 @@
           Bez tego system usypia proces i grupa traci łączność.</td>
         </tr>
         <tr>
+          <td><strong>Podłączona płytka radiowa</strong> (USB)</td>
+          <td>Tryb dalekiego zasięgu, jeśli podłączysz własną płytkę. Zgody na dostęp
+          do konkretnego urządzenia udziela system przy podłączeniu. Bez płytki
+          uprawnienie nie jest do niczego używane.</td>
+        </tr>
+        <tr>
           <td><strong>Internet</strong></td>
-          <td>Wyłącznie trzy zastosowania opisane w §4.</td>
+          <td>Wyłącznie zastosowania wymienione w §4.</td>
         </tr>
       </tbody>
     </table>
@@ -124,7 +145,7 @@
 
     <h2>4. Jedyne połączenia z internetem</h2>
     <p>Aplikacja jest zaprojektowana do działania bez internetu. Łączy się z siecią
-    w dokładnie trzech sytuacjach, wszystkich zwykle <strong>przed wyjazdem</strong>:</p>
+    w pięciu sytuacjach, wszystkich zwykle <strong>przed wyjazdem</strong>:</p>
     <ol>
       <li><strong>RevenueCat</strong> — obsługa zakupu i weryfikacja aktywnej subskrypcji Pro.
       RevenueCat otrzymuje anonimowy identyfikator urządzenia (w postaci
@@ -137,8 +158,21 @@
       <a href="https://osmfoundation.org/wiki/Privacy_Policy" rel="noopener">osmfoundation.org</a></li>
       <li><strong>Serwer kafli mapowych</strong> — pobranie paczki mapy offline wybranego
       obszaru.</li>
+      <li><strong><code>packs.haskelar.pl</code></strong> (Cloudflare R2, nasz adres) —
+      pobranie katalogu materiałów oraz tego, co z niego wybierzesz: paczek wiedzy
+      Przewodnika i jego modelu. Serwer otrzymuje standardowe dane połączenia (adres IP,
+      nagłówki przeglądarki plików) i informację o tym, który plik pobierasz.
+      <strong>Nie wysyłamy tam Twojego imienia, treści rozmów, pytań do Przewodnika
+      ani lokalizacji.</strong> Katalog jest podpisany kluczem wydawcy i aplikacja
+      odrzuca go, jeśli podpis się nie zgadza.</li>
+      <li><strong>Usługi Google Play (ML Kit)</strong> — pobranie pakietów językowych
+      tłumacza. Pobieranie prowadzi Google na Twoim urządzeniu; do Google trafia
+      informacja o tym, który pakiet językowy pobierasz, wraz ze standardowymi danymi
+      Twojego konta Google i urządzenia. <strong>Samo tłumaczenie odbywa się później
+      wyłącznie na telefonie</strong> — tłumaczony tekst nigdzie nie jest wysyłany.
+      <a href="https://policies.google.com/privacy" rel="noopener">policies.google.com/privacy</a></li>
     </ol>
-    <p>Poza tymi trzema przypadkami aplikacja nie wysyła niczego do internetu.
+    <p>Poza tymi pięcioma przypadkami aplikacja nie wysyła niczego do internetu.
     W szczególności <strong>nie zawiera reklam ani narzędzi analitycznych</strong>.</p>
 
     <h2>5. Dziennik diagnostyczny</h2>

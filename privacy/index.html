@@ -29,7 +29,7 @@
     <h1>Privacy Policy</h1>
     <p class="meta">
       <strong>App</strong>: AlwaysInTouch (<code>pl.haskelar.alwaysintouch</code>)<br>
-      <strong>Last updated</strong>: 30 July 2026
+      <strong>Last updated</strong>: 19 August 2026
     </p>
 
     <div class="card tldr">
@@ -51,8 +51,17 @@
       <li>the display name you choose on first launch,</li>
       <li>map pins and notes,</li>
       <li>game scores,</li>
+      <li>Guide conversations — your questions, the answers, and the trimmed source
+      passages they were built from,</li>
       <li>the diagnostic log (technical connection information — see §5).</li>
     </ul>
+    <p>Guide conversations <strong>survive leaving a group</strong> — they are not part of
+    a session, and ending one does not erase them. You delete them the same way as
+    everything else: by uninstalling the app or clearing its data.</p>
+    <p>Separately, outside that database, the app's folder holds <strong>the material you
+    downloaded</strong>: offline maps, the Guide's knowledge packs and its model. That is
+    content you fetched, not data about you — none of it is produced by your use of
+    the app.</p>
     <p>Android backup is <strong>disabled</strong> for this app
     (<code>allowBackup="false"</code>), so this data is never copied to Google Drive.</p>
     <p>Uninstalling the app deletes it irreversibly. We hold no copy of it and cannot
@@ -67,6 +76,12 @@
       <li>your position on the group map, if you enable location sharing,</li>
       <li>map pins and game scores.</li>
     </ul>
+    <p><strong>Location sharing has no default state and no continuous mode.</strong>
+    Every share is a separate, explicit decision: you choose how often your position is
+    sent and for how long — <strong>four hours at the most</strong> — after which it
+    expires by itself. Positions are <strong>never written to storage on any device</strong>:
+    neither yours on other people's phones, nor theirs on yours. They live in the memory of
+    the running app and disappear with the session.</p>
     <p>Traffic between devices is encrypted. It passes through no intermediary server and
     does not travel over the internet — it stays within the local network or the Bluetooth
     link.</p>
@@ -111,8 +126,14 @@
           the system suspends the process and the group loses connectivity.</td>
         </tr>
         <tr>
+          <td><strong>Attached radio board</strong> (USB)</td>
+          <td>Long-range mode, if you attach a board of your own. The system asks for
+          access to that specific device when you plug it in. With no board attached,
+          the permission is used for nothing.</td>
+        </tr>
+        <tr>
           <td><strong>Internet</strong></td>
-          <td>Only the three uses described in §4.</td>
+          <td>Only the uses listed in §4.</td>
         </tr>
       </tbody>
     </table>
@@ -122,7 +143,7 @@
 
     <h2>4. The only internet connections</h2>
     <p>The app is designed to work without an internet connection. It reaches the network in
-    exactly three situations, all of them typically <strong>before you set off</strong>:</p>
+    five situations, all of them typically <strong>before you set off</strong>:</p>
     <ol>
       <li><strong>RevenueCat</strong> — handling the purchase and verifying an active Pro
       subscription. RevenueCat receives an anonymous device identifier (in the form
@@ -135,8 +156,21 @@
       <a href="https://osmfoundation.org/wiki/Privacy_Policy" rel="noopener">osmfoundation.org</a></li>
       <li><strong>Map tile server</strong> — downloading the offline map package for the area
       you select.</li>
+      <li><strong><code>packs.haskelar.pl</code></strong> (Cloudflare R2, our own address) —
+      downloading the catalogue of material and whatever you pick from it: the Guide's
+      knowledge packs and its model. The server receives standard connection data (IP
+      address, request headers) and which file you are downloading. <strong>We do not send
+      it your name, your conversations, your questions to the Guide, or your location.</strong>
+      The catalogue is signed with the publisher's key and the app rejects it if the
+      signature does not match.</li>
+      <li><strong>Google Play services (ML Kit)</strong> — downloading the translator's
+      language packs. The download is carried out by Google on your device; Google receives
+      which language pack you are downloading, along with the standard data of your Google
+      account and device. <strong>The translation itself then happens on the phone alone</strong>
+      — the text being translated is never sent anywhere.
+      <a href="https://policies.google.com/privacy" rel="noopener">policies.google.com/privacy</a></li>
     </ol>
-    <p>Outside these three cases the app sends nothing to the internet. In particular, it
+    <p>Outside these five cases the app sends nothing to the internet. In particular, it
     <strong>contains no advertising and no analytics tooling</strong>.</p>
 
     <h2>5. Diagnostic log</h2>
