@@ -1,21 +1,94 @@
+/* Styl haskelar.pl.
+ *
+ * Wspólny język wizualny z ait.haskelar.pl — tokeny pochodzą z motywu aplikacji
+ * AlwaysInTouch („papier + atrament"). Wzorcem jest serwer/www/ait/style.css
+ * w drugim repozytorium; przy zmianie kolorów albo kroju zaglądaj tam.
+ *
+ * Zasada układu jest jedna: SEKCJE ROZDZIELA LINIA WŁOSOWA, NIE RAMKA.
+ *
+ * UWAGA. Ten arkusz obsługuje także /polityka-prywatnosci/ i /privacy/, których
+ * adresy siedzą w Play Console. Klasy .site, .wrap, .brand, .lang, .meta, .card,
+ * .card.tldr, .scroll oraz style table/code są ICH kontraktem — wolno je
+ * przemalować, nie wolno usunąć ani przemianować.
+ */
+
+/* ── Krój nagłówków ───────────────────────────────────────────────────────────
+ *
+ * IBM Plex Serif leży w /fonts/, obok strony — żadnego żądania do Google.
+ * Polskie znaki siedzą w podzbiorze „latin-ext", stąd dwa pliki zamiast
+ * jednego. Licencja: fonts/OFL.txt. Tekst ciągły zostaje na kroju systemowym.
+ */
+
+@font-face {
+  font-family: 'IBM Plex Serif';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/fonts/ibm-plex-serif-600-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+                 U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122,
+                 U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'IBM Plex Serif';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/fonts/ibm-plex-serif-600-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7,
+                 U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F,
+                 U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113,
+                 U+2C60-2C7F, U+A720-A7FF;
+}
+
 :root {
-  --bg: #ffffff;
-  --fg: #1a1d21;
-  --muted: #5c6570;
-  --line: #e3e7eb;
-  --accent: #2563eb;
-  --card: #f7f9fb;
-  --maxw: 46rem;
+  --paper:          #FAFAF7;
+  --ink:            #111213;
+  --ink-secondary:  #5F6063;
+  --hairline:       #E3E2DD;
+  --surface-dim:    #EDF3F7;
+
+  --brand:          #115087;
+  --brand-pressed:  #0E5189;
+  --on-brand:       #FFFFFF;
+
+  --accent:         #2799C0;
+
+  /* Mały tekst nigdy nie dostaje --accent: na papierze daje ~3,2:1 i oblewa
+   * WCAG AA. Ta sama reguła co AppColors.accentText w aplikacji. */
+  --accent-text:    #115087;
+
+  --sp-xs: 4px;  --sp-sm: 8px;  --sp-md: 16px;
+  --sp-lg: 24px; --sp-xl: 32px; --sp-xxl: 48px; --sp-huge: 64px;
+
+  --radius: 6px;
+  --screen: 24px;
+  --touch: 48px;
+
+  /* Dokumenty prawne czyta się w jednej wąskiej kolumnie; strona główna
+   * rozpycha .wrap do 58rem osobną regułą na dole. */
+  --maxw: 44rem;
+
+  --serif: 'IBM Plex Serif', Georgia, 'Times New Roman', serif;
+  --sans:  -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+           "Helvetica Neue", Arial, sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #0f1216;
-    --fg: #e6eaef;
-    --muted: #9aa4b0;
-    --line: #242a31;
-    --accent: #6ea8fe;
-    --card: #161b21;
+    --paper:          #121212;
+    --ink:            #F4F3EF;
+    --ink-secondary:  #A6A6A2;
+    --hairline:       #2C2C2A;
+    --surface-dim:    #161E24;
+
+    --brand:          #7FD4E5;
+    --brand-pressed:  #2799C0;
+    --on-brand:       #0E5189;
+
+    --accent:         #7FD4E5;
+    --accent-text:    #7FD4E5;
   }
 }
 
@@ -25,149 +98,177 @@ html { -webkit-text-size-adjust: 100%; }
 
 body {
   margin: 0;
-  background: var(--bg);
-  color: var(--fg);
-  font: 16px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-        "Helvetica Neue", Arial, sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.6;
 }
 
 .wrap {
   max-width: var(--maxw);
   margin: 0 auto;
-  padding: 0 1.25rem;
+  padding: 0 var(--screen);
 }
 
+/* ── Nagłówek i stopka ────────────────────────────────────────────────────── */
+
 header.site {
-  border-bottom: 1px solid var(--line);
-  padding: 1.1rem 0;
+  border-bottom: 1px solid var(--hairline);
+  padding: var(--sp-sm) 0;
 }
 
 header.site .wrap {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.75rem 1rem;
+  gap: var(--sp-sm) var(--sp-md);
   align-items: center;
   justify-content: space-between;
 }
 
 .brand {
-  font-weight: 650;
+  font-family: var(--serif);
+  font-weight: 600;
   letter-spacing: -0.01em;
-  font-size: 1.05rem;
+  font-size: 20px;
   text-decoration: none;
-  color: var(--fg);
+  color: var(--ink);
 }
 
 nav a {
-  color: var(--muted);
+  color: var(--ink-secondary);
   text-decoration: none;
-  font-size: 0.94rem;
-  margin-left: 1.1rem;
+  font-size: 15px;
+  margin-left: var(--sp-lg);
 }
 
 nav a:first-child { margin-left: 0; }
 
-nav a:hover, a:hover { color: var(--accent); }
+nav a:hover, a:hover { color: var(--brand-pressed); }
 
+/* Przełącznik języka na podstronach z polityką. Pełny cel dotykowy 48 px —
+ * to najmniejszy element na stronie i najłatwiej o nim zapomnieć. */
 .lang {
   display: inline-flex;
-  border: 1px solid var(--line);
-  border-radius: 7px;
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius);
   overflow: hidden;
-  font-size: 0.82rem;
+  font-size: 13px;
 }
 
 .lang a {
-  padding: 0.24rem 0.62rem;
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--touch);
+  padding: 0 14px;
   text-decoration: none;
-  color: var(--muted);
+  color: var(--ink-secondary);
   margin: 0;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
 }
 
 .lang a[aria-current="true"] {
-  background: var(--accent);
-  color: #fff;
+  background: var(--brand);
+  color: var(--on-brand);
 }
 
-main { padding: 2.6rem 0 4rem; }
+footer.site {
+  border-top: 1px solid var(--hairline);
+  padding: var(--sp-lg) 0 var(--sp-xxl);
+  color: var(--ink-secondary);
+  font-size: 14px;
+}
+
+footer.site a { color: var(--ink-secondary); }
+
+/* ── Typografia ───────────────────────────────────────────────────────────── */
+
+main { padding: var(--sp-xxl) 0 var(--sp-huge); }
 
 h1 {
-  font-size: clamp(1.65rem, 4.5vw, 2.2rem);
-  line-height: 1.2;
+  font-family: var(--serif);
+  font-size: clamp(30px, 5vw, 42px);
+  line-height: 1.08;
+  font-weight: 600;
   letter-spacing: -0.02em;
-  margin: 0 0 0.5rem;
+  margin: 0 0 var(--sp-md);
 }
 
 h2 {
-  font-size: 1.16rem;
-  letter-spacing: -0.01em;
-  margin: 2.4rem 0 0.6rem;
-  padding-top: 0.4rem;
+  font-family: var(--serif);
+  font-size: clamp(22px, 3vw, 28px);
+  line-height: 1.15;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  margin: var(--sp-xl) 0 var(--sp-md);
 }
 
-p, li { color: var(--fg); }
+p, li { color: var(--ink); }
 
 .lead {
-  font-size: 1.08rem;
-  color: var(--muted);
-  margin: 0 0 2rem;
+  font-size: 18px;
+  color: var(--ink-secondary);
+  margin: 0 0 var(--sp-xl);
 }
 
-a { color: var(--accent); }
+a { color: var(--accent-text); text-underline-offset: 2px; }
 
-ul { padding-left: 1.2rem; }
+ul { padding-left: 1.15rem; }
 
-li { margin: 0.3rem 0; }
+li { margin: var(--sp-sm) 0; }
 
 ol { padding-left: 1.3rem; }
 
 .meta {
-  color: var(--muted);
-  font-size: 0.9rem;
-  margin: 0 0 2.2rem;
-  padding-bottom: 1.4rem;
-  border-bottom: 1px solid var(--line);
+  color: var(--ink-secondary);
+  font-size: 14px;
+  margin: 0 0 var(--sp-xl);
+  padding-bottom: var(--sp-lg);
+  border-bottom: 1px solid var(--hairline);
 }
 
-.meta strong { color: var(--fg); }
+.meta strong { color: var(--ink); }
 
 code {
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   font-size: 0.88em;
-  background: var(--card);
-  border: 1px solid var(--line);
+  background: var(--surface-dim);
+  border: 1px solid var(--hairline);
   border-radius: 4px;
   padding: 0.08em 0.35em;
 }
 
+/* Karta zostaje w kontrakcie podstron prawnych, ale traci wygląd pudełka:
+ * wystarczy pionowa kreska, żeby odróżnić wtrącenie od treści. */
 .card {
-  background: var(--card);
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  padding: 1.1rem 1.25rem;
-  margin: 1.5rem 0;
+  border-left: 2px solid var(--hairline);
+  padding: 0 0 0 var(--sp-lg);
+  margin: var(--sp-lg) 0;
+  color: var(--ink-secondary);
 }
 
 .card p:first-child { margin-top: 0; }
 .card p:last-child { margin-bottom: 0; }
 
-.card.tldr { border-left: 3px solid var(--accent); }
+.card.tldr { border-left-color: var(--accent); color: var(--ink); }
 
 table {
   width: 100%;
   border-collapse: collapse;
-  margin: 1rem 0;
-  font-size: 0.94rem;
+  margin: var(--sp-md) 0;
+  font-size: 15px;
 }
 
 th, td {
   text-align: left;
-  padding: 0.55rem 0.7rem;
-  border-bottom: 1px solid var(--line);
+  padding: var(--sp-sm) var(--sp-md) var(--sp-sm) 0;
+  border-bottom: 1px solid var(--hairline);
   vertical-align: top;
 }
 
-th { color: var(--muted); font-weight: 600; }
+th { color: var(--ink-secondary); font-weight: 600; }
 
 td:first-child { white-space: nowrap; }
 
@@ -177,14 +278,11 @@ td:first-child { white-space: nowrap; }
 
 .scroll { overflow-x: auto; }
 
-footer.site {
-  border-top: 1px solid var(--line);
-  padding: 1.6rem 0 2.5rem;
-  color: var(--muted);
-  font-size: 0.9rem;
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 2px;
 }
-
-footer.site a { color: var(--muted); }
 
 /* ==========================================================================
    Strona główna — wizytówka autora.
@@ -193,107 +291,114 @@ footer.site a { color: var(--muted); }
    prywatności korzystają z klas powyżej i nie wolno ich ruszać: ich adresy
    są wpisane w Play Console, a treść jest dokumentem prawnym.
 
-   Szerokość zawartości rośnie tu do 62rem, bo siatka kafelków z projektami
-   potrzebuje więcej miejsca niż kolumna 46rem przeznaczona pod czytanie.
+   Kolumna rośnie tu do 58rem, bo lista projektów ma po prawej stronie drugą,
+   węższą szpaltę z nazwami narzędzi.
    ========================================================================== */
 
-body.glowna .wrap { max-width: 62rem; }
+body.glowna .wrap { max-width: 58rem; }
 
-/* ---------------------------------------------------------------- nagłówek */
+/* ---------------------------------------------------------------- otwarcie */
 
-.hero { padding: 3.2rem 0 0.4rem; }
+.hero { padding: var(--sp-xxl) 0 0; }
 
 .hero .kto {
   display: inline-block;
-  font-size: 0.78rem;
-  font-weight: 650;
-  letter-spacing: 0.12em;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.8px;
   text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 0.9rem;
+  color: var(--accent-text);
+  margin-bottom: var(--sp-md);
 }
 
 .hero h1 {
-  font-size: clamp(2rem, 6vw, 3rem);
-  line-height: 1.08;
-  letter-spacing: -0.03em;
-  margin: 0 0 0.8rem;
-  max-width: 20ch;
+  font-size: clamp(34px, 6.4vw, 56px);
+  line-height: 1.03;
+  letter-spacing: -0.025em;
+  margin: 0 0 var(--sp-md);
+  max-width: 16ch;
 }
 
 .hero .lead {
-  font-size: clamp(1.02rem, 2.2vw, 1.16rem);
-  max-width: 56ch;
-  margin-bottom: 1.6rem;
+  font-size: clamp(17px, 2.2vw, 20px);
+  line-height: 1.45;
+  max-width: 52ch;
+  margin-bottom: var(--sp-lg);
 }
 
-.hero-akcje { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+.hero-akcje { display: flex; flex-wrap: wrap; gap: var(--sp-sm); }
 
 .przycisk {
   display: inline-flex;
   align-items: center;
-  min-height: 44px;          /* cel dotykowy — WCAG 2.5.5 */
-  padding: 0.5rem 1.1rem;
-  border-radius: 8px;
-  border: 1px solid var(--line);
-  background: var(--card);
-  color: var(--fg);
-  font-size: 0.94rem;
+  min-height: var(--touch);         /* cel dotykowy — WCAG 2.5.5 */
+  padding: 0 var(--sp-lg);
+  border-radius: var(--radius);
+  border: 1px solid var(--hairline);
+  color: var(--ink);
+  font-size: 15px;
   font-weight: 600;
   text-decoration: none;
 }
 
-.przycisk:hover { border-color: var(--accent); color: var(--accent); }
+.przycisk:hover { border-color: var(--brand); color: var(--brand-pressed); }
 
 .przycisk.mocny {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: #fff;
+  background: var(--brand);
+  border-color: var(--brand);
+  color: var(--on-brand);
 }
 
-.przycisk.mocny:hover { opacity: 0.9; color: #fff; }
+.przycisk.mocny:hover { background: var(--brand-pressed); color: var(--on-brand); }
 
-/* ---------------------------------------------------------------- kafelki */
+/* ---------------------------------------------------------------- sekcje */
 
-.siatka {
+.sekcja {
+  border-top: 1px solid var(--hairline);
+  padding-top: var(--sp-xl);
+  margin-top: var(--sp-huge);
+}
+
+.sekcja > h2 { margin-top: 0; }
+
+/* ---------------------------------------------------------------- roboty
+ *
+ * Lista projektów. Każdy to nazwa, jedno zdanie po ludzku i — z boku, drobnym
+ * drukiem — nazwy narzędzi. Kto zna, ten sprawdzi; kto nie zna, ten minie
+ * i nic nie traci. */
+
+.roboty { list-style: none; padding: 0; margin: var(--sp-lg) 0 0; }
+
+.roboty > li {
   display: grid;
-  gap: 0.85rem;
   grid-template-columns: 1fr;
-  margin: 1.1rem 0 0;
-  padding: 0;
-  list-style: none;
+  gap: var(--sp-xs) var(--sp-xl);
+  padding: var(--sp-lg) 0;
+  margin: 0;
+  border-top: 1px solid var(--hairline);
 }
 
-/* Elementem siatki jest <li>, więc klasa układu musi siedzieć na nim, a nie
-   na kafelku w środku. `display: flex` plus `flex: 1` wyrównuje wysokości
-   w wierszu — bez tego dwa kafelki obok siebie mają różną wysokość i siatka
-   wygląda na rozjechaną. */
-.siatka > li { display: flex; }
-.siatka > li > .kafel { flex: 1; }
+.roboty > li:first-child { border-top: 0; padding-top: 0; }
 
-@media (min-width: 40rem) {
-  .siatka { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (min-width: 44rem) {
+  .roboty > li { grid-template-columns: minmax(0, 1fr) 13rem; }
+  .roboty .narzedzia { grid-row: span 2; text-align: right; }
 }
 
-.kafel {
-  display: flex;
-  flex-direction: column;
-  gap: 0.3rem;
-  padding: 1.05rem 1.15rem;
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  background: var(--card);
+.roboty h3 {
+  font-family: var(--serif);
+  font-size: 22px;
+  line-height: 1.2;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin: 0;
 }
 
-.kafel-glowa {
-  display: flex;
-  align-items: baseline;
-  gap: 0.55rem;
-  flex-wrap: wrap;
+.roboty p { margin: 0; color: var(--ink-secondary); max-width: 52ch; }
+
+.narzedzia {
+  font-size: 13px;
+  letter-spacing: 0.4px;
+  color: var(--ink-secondary);
+  align-self: start;
 }
-
-.kafel-tytul { font-weight: 660; font-size: 1rem; letter-spacing: -0.01em; }
-
-.kafel p { margin: 0; color: var(--muted); font-size: 0.92rem; line-height: 1.5; }
-
-/* ------------------------------------------------------------------ stos */

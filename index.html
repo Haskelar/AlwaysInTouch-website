@@ -5,9 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Haskelar — buduję rzeczy, które działają bez internetu</title>
 <meta name="description" content="Dominik (Haskelar) — po godzinach buduję aplikacje mobilne działające offline i utrzymuję własny serwer. Największy projekt: AlwaysInTouch, komunikator łączący telefony bezpośrednio ze sobą.">
+<meta name="theme-color" content="#FAFAF7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#121212" media="(prefers-color-scheme: dark)">
 <link rel="canonical" href="https://haskelar.pl/">
 <link rel="stylesheet" href="/style.css">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠️</text></svg>">
+<link rel="preload" href="/fonts/ibm-plex-serif-600-latin-ext.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23115087'/><circle cx='50' cy='50' r='17' fill='%23FAFAF7'/></svg>">
 <meta property="og:title" content="Haskelar — buduję rzeczy, które działają bez internetu">
 <meta property="og:description" content="Aplikacje mobilne działające offline i własna infrastruktura serwerowa. Największy projekt: AlwaysInTouch.">
 <meta property="og:type" content="website">
@@ -32,56 +35,50 @@
     <section class="hero">
       <span class="kto">Dominik · Haskelar</span>
       <h1>Buduję rzeczy, które działają bez internetu</h1>
-      <p class="lead">Po godzinach robię aplikacje mobilne i utrzymuję własne
-      serwery. Lubię projekty, w których da się wyłączyć wtyczkę i sprawdzić,
-      czy naprawdę działają — najwięcej czasu zjada mi teraz AlwaysInTouch,
-      komunikator łączący telefony bezpośrednio ze sobą.</p>
+      <p class="lead">Po godzinach robię aplikacje na telefony i utrzymuję własne
+      serwery. Lubię projekty, w których da się wyciągnąć wtyczkę i sprawdzić, czy
+      naprawdę działają. Najwięcej czasu zjada mi teraz AlwaysInTouch — komunikator,
+      w którym telefony rozmawiają wprost ze sobą.</p>
       <div class="hero-akcje">
         <a class="przycisk mocny" href="https://ait.haskelar.pl/">Zobacz AlwaysInTouch</a>
         <a class="przycisk" href="mailto:kontakt@haskelar.pl">kontakt@haskelar.pl</a>
       </div>
     </section>
 
-    <h2>Czym się zajmuję po godzinach</h2>
+    <section class="sekcja">
+      <h2>Czym się zajmuję po godzinach</h2>
 
-    <ul class="siatka">
-      <li>
-        <div class="kafel">
-          <span class="kafel-glowa"><span class="kafel-tytul">AlwaysInTouch</span></span>
-          <p>Komunikator, w którym telefony gadają ze sobą bez internetu,
-          serwera i kont — przez Wi-Fi w sieci lokalnej albo Bluetooth.
-          Do tego mapy offline, tłumacz i dyktowanie liczone na urządzeniu.
-          Cały projekt opisałem na <a href="https://ait.haskelar.pl/">ait.haskelar.pl</a>.</p>
-        </div>
-      </li>
-      <li>
-        <div class="kafel">
-          <span class="kafel-glowa"><span class="kafel-tytul">Kalibracja audio</span></span>
-          <p>Aplikacja mobilna we Flutterze do analizy i kalibracji systemów
-          audio w samochodzie.</p>
-        </div>
-      </li>
-      <li>
-        <div class="kafel">
-          <span class="kafel-glowa"><span class="kafel-tytul">Homelab</span></span>
-          <p>Własne środowisko sieciowe i serwerowe — Proxmox, kontenery LXC,
-          Docker, Home Assistant. Ta strona i wszystko obok niej stoi właśnie
-          na nim.</p>
-        </div>
-      </li>
-      <li>
-        <div class="kafel">
-          <span class="kafel-glowa"><span class="kafel-tytul">Modele lokalnie</span></span>
-          <p>Uruchamiam i mierzę modele językowe na własnym sprzęcie, zamiast
-          wysyłać wszystko do cudzej chmury. Obudowane skryptami w Pythonie,
-          bo dopiero wtedy widać, który model naprawdę nadaje się do roboty.</p>
-        </div>
-      </li>
-    </ul>
+      <ul class="roboty">
+        <li>
+          <h3>AlwaysInTouch</h3>
+          <p class="narzedzia">Flutter · Android · Wi-Fi i Bluetooth</p>
+          <p>Komunikator, w którym telefony gadają ze sobą bez internetu, serwera
+          i zakładania kont. Do tego mapy, tłumacz i dyktowanie działające
+          na samym telefonie. Cały projekt opisałem na
+          <a href="https://ait.haskelar.pl/">ait.haskelar.pl</a>.</p>
+        </li>
+        <li>
+          <h3>Serwer w domu</h3>
+          <p class="narzedzia">Proxmox · LXC · Docker · Home Assistant</p>
+          <p>Własna serwerownia wielkości półki. Ta strona i wszystko obok niej
+          stoi właśnie na niej — łącznie z panelem, który pilnuje, czy reszta
+          jeszcze żyje.</p>
+        </li>
+        <li>
+          <h3>Modele językowe u siebie</h3>
+          <p class="narzedzia">Python · pomiary · własny sprzęt</p>
+          <p>Uruchamiam modele na własnym komputerze, zamiast wysyłać wszystko
+          do cudzej chmury. Mierzę je po kolei, bo dopiero wtedy widać, który
+          naprawdę nadaje się do roboty.</p>
+        </li>
+      </ul>
+    </section>
 
-    <h2>Kontakt</h2>
-    <p>Najprościej mailem: <a href="mailto:kontakt@haskelar.pl">kontakt@haskelar.pl</a>.
-    Odpowiadam osobiście.</p>
+    <section class="sekcja">
+      <h2>Kontakt</h2>
+      <p>Najprościej mailem: <a href="mailto:kontakt@haskelar.pl">kontakt@haskelar.pl</a>.
+      Odpowiadam osobiście.</p>
+    </section>
 
   </div>
 </main>
