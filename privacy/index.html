@@ -44,10 +44,10 @@
 
     <h2>1. Data that stays on your device</h2>
     <p>The following data is stored <strong>locally only</strong>, in a database encrypted
-    with SQLCipher whose key is held in the Android system keystore:</p>
+    with SQLCipher whose key is held in the Android system keystore (Keystore):</p>
     <ul>
       <li>the content of text messages,</li>
-      <li>photos sent to and received from the group,</li>
+      <li>photo thumbnails,</li>
       <li>the display name you choose on first launch,</li>
       <li>map pins and notes,</li>
       <li>game scores,</li>
@@ -55,18 +55,21 @@
       passages they were built from.</li>
     </ul>
     <p>Guide conversations <strong>survive leaving a group</strong> — they are not part of
-    a session, and ending one does not erase them. You delete them the same way as
-    everything else: by uninstalling the app or clearing its data.</p>
-    <p>Separately, outside that database, in the app's <strong>private storage</strong> (a folder
-    other apps cannot access, but without additional encryption):</p>
+    a session, so neither ending the session nor the <em>Delete data from this phone</em>
+    row (§7) erases them. You delete a single conversation from the Guide list
+    (<em>Delete conversation</em>), and all of them at once by uninstalling the app or
+    clearing its data.</p>
+    <p>Separately, in the app's <strong>private storage</strong> (a folder other apps cannot
+    access, but without additional encryption):</p>
     <ul>
-      <li>The caption of a photo you are sending right now sits unencrypted in the file
+      <li>full-size photos sent to and received from the group — they are too large to
+      keep in the database,</li>
+      <li>the caption of a photo you are sending right now — it sits unencrypted in the file
       <code>media/pending_photos.json</code>, so that sending survives the system closing
       the app while the camera is open; the entry is removed once the photo is sent, and
-      an abandoned one expires after 24 hours.</li>
-      <li><strong>The material you downloaded</strong>: offline maps, the Guide's knowledge
-      packs and its model. That is content you fetched, not data about you — none of it is
-      produced by your use of the app.</li>
+      an abandoned one expires after 24 hours,</li>
+      <li>downloaded material: offline maps, and the assistant's models and knowledge
+      packs.</li>
     </ul>
     <p>The diagnostic log (technical connection information — see §5) is kept in the folder
     <code>Android/data/pl.haskelar.alwaysintouch/files/logs</code>. Other apps cannot access
@@ -82,15 +85,25 @@
     <ul>
       <li>messages and photos,</li>
       <li>your display name,</li>
-      <li>your position on the group map, if you enable location sharing,</li>
       <li>map pins and game scores.</li>
     </ul>
-    <p><strong>Location sharing has no default state and no continuous mode.</strong>
-    Every share is a separate, explicit decision: you choose how often your position is
-    sent and for how long — <strong>four hours at the most</strong> — after which it
-    expires by itself. Positions are <strong>never written to storage on any device</strong>:
-    neither yours on other people's phones, nor theirs on yours. They live in the memory of
-    the running app and disappear with the session.</p>
+    <p><strong>Your position on the map is sent to no one until you do it yourself.</strong>
+    You can share it with the group, and every time it is your explicit decision — there is
+    no default mode and no “consent forever”:</p>
+    <ul>
+      <li>sharing has a <strong>window</strong> (15 min, 1 hour or 4 hours) and an
+      <strong>interval between updates</strong>, both chosen by you; there is no “never
+      ends” option,</li>
+      <li>it <strong>switches off by itself</strong> when the window ends, and you can stop
+      it at any moment,</li>
+      <li>while it is on, the app's notification says so plainly, and the screen shows a bar
+      with a countdown and an “End” button,</li>
+      <li><strong>no position — neither yours nor anyone else's — is ever written to
+      storage.</strong> Coordinates live in the memory of the running app and disappear
+      with it; someone else's dot fades by itself once fresh positions stop arriving,</li>
+      <li>positions do not go into the diagnostic log either (the only exception is the
+      range-measurement CSV file, which you create deliberately in Diagnostics).</li>
+    </ul>
     <p>Traffic between devices is encrypted. It passes through no intermediary server and
     does not travel over the internet — it stays within the local network or the Bluetooth
     link.</p>
@@ -108,12 +121,14 @@
           <td><strong>Location</strong> (precise and approximate)</td>
           <td>Required by Android in order to start a local hotspot
           (<code>LocalOnlyHotspot</code>) — without it a group session cannot start.
-          It also shows your position on the group map, if you turn that on yourself.</td>
+          It also shows your own position on your map and — <strong>only when you turn it
+          on yourself</strong> — lets you share it with the group for a time you choose.</td>
         </tr>
         <tr>
           <td><strong>Camera</strong></td>
-          <td>Scanning the QR code when joining a group, and taking photos to send
-          to the group.</td>
+          <td>Scanning the QR code when joining a group, taking photos to send to the group,
+          and translating text from the camera preview (text recognition happens entirely
+          on the device — the image is never sent anywhere).</td>
         </tr>
         <tr>
           <td><strong>Bluetooth</strong> (scan, advertise, connect)</td>
@@ -132,13 +147,11 @@
         <tr>
           <td><strong>Foreground service / battery optimisation exemption</strong></td>
           <td>Keeping the connection to the group alive while the screen is off. Without it
-          the system suspends the process and the group loses connectivity.</td>
-        </tr>
-        <tr>
-          <td><strong>Attached radio board</strong> (USB)</td>
-          <td>Long-range mode, if you attach a board of your own. The system asks for
-          access to that specific device when you plug it in. With no board attached,
-          the permission is used for nothing.</td>
+          the system suspends the process and the group loses connectivity. The service is
+          also declared with the “location” type, because without it position sharing stops
+          working with the phone in your pocket — <strong>your position is read only within
+          the window you opened yourself</strong>. We do not ask for the “background
+          location” permission.</td>
         </tr>
         <tr>
           <td><strong>Internet</strong></td>
@@ -154,8 +167,9 @@
     see §4, item 2.</p>
 
     <h2>4. The only internet connections</h2>
-    <p>The app is designed to work without an internet connection. It reaches the network in
-    five situations, all of them typically <strong>before you set off</strong>:</p>
+    <p>The app is designed to work without an internet connection. It uses the network only
+    to <strong>get ready before a trip</strong> and to handle a purchase — never to carry
+    what happens in the group. The complete list:</p>
     <ol>
       <li><strong>RevenueCat</strong> — handling the purchase and verifying the plan you
       bought. RevenueCat receives an anonymous device identifier (in the form
@@ -168,27 +182,31 @@
       <strong>coordinates of the centre of that area</strong> (to roughly city-level
       precision). This is not your GPS position, only the piece of the map you are looking at.
       <a href="https://osmfoundation.org/wiki/Privacy_Policy" rel="noopener">osmfoundation.org</a></li>
-      <li><strong>Map tile server</strong> — downloading the offline map package for the area
-      you select.</li>
-      <li><strong><code>packs.haskelar.pl</code></strong> (Cloudflare R2, our own address) —
-      downloading the catalogue of material and whatever you pick from it: the Guide's
-      knowledge packs and its model. The server receives standard connection data (IP
-      address, request headers) and which file you are downloading. <strong>We do not send
-      it your name, your conversations, your questions to the Guide, or your location.</strong>
-      The catalogue is signed with the publisher's key and the app rejects it if the
-      signature does not match.</li>
-      <li><strong>Google Play services (ML Kit)</strong> — downloading the translator's
-      language packs. The download is carried out by Google on your device; Google receives
-      which language pack you are downloading, along with the standard data of your Google
-      account and device. <strong>The translation itself then happens on the phone alone</strong>
-      — the text being translated is never sent anywhere. The ML Kit library also sends
+      <li><strong>Map tile server</strong> (Protomaps / OpenStreetMap) — downloading the
+      offline map of the area you select.</li>
+      <li><strong>Cloudflare</strong> (<code>packs.haskelar.pl</code>) — the publisher's
+      catalogue of packs and the pack downloads themselves (Guide content). Cloudflare sees
+      your IP address and which file you are downloading, as with any download from
+      a website; the storage belongs to the app's publisher. The catalogue is
+      cryptographically signed and the app rejects a pack whose signature or checksum does
+      not match — downloading from the publisher's server does <strong>not</strong> mean the
+      app trusts whatever came from there. Until 4 August 2026 this role was played by
+      GitHub (<code>raw.githubusercontent.com</code>).</li>
+      <li><strong>Google Play services (ML Kit)</strong> — downloading the offline
+      translator's language packs. The app starts the download, but Google Play services on
+      your device carry it out; the information about which language pack is being
+      downloaded is passed on. <strong>Translation and text recognition then happen
+      entirely offline</strong> — texts, photos and the camera image never leave the
+      device. The ML Kit library also sends
       Google aggregated diagnostic data and usage statistics (device and app information,
       an installation identifier, performance metrics, error codes) — never the content of
       translations or images.
       <a href="https://policies.google.com/privacy" rel="noopener">policies.google.com/privacy</a></li>
     </ol>
     <p>Outside these five cases the app sends nothing to the internet. In particular, it
-    <strong>contains no advertising and no analytics tooling of our own</strong>.</p>
+    <strong>contains no advertising and no analytics tooling of our own</strong>, and your
+    conversations, photos and game scores have no path off the device other than the
+    direct link to your group's phones (§2).</p>
 
     <h2>5. Diagnostic log</h2>
     <p>The app keeps a local technical log (connection state, errors) that helps diagnose

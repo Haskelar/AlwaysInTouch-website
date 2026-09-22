@@ -48,7 +48,7 @@
     Androida (Keystore):</p>
     <ul>
       <li>treść wiadomości tekstowych,</li>
-      <li>zdjęcia wysłane i odebrane w grupie,</li>
+      <li>miniatury zdjęć,</li>
       <li>nazwa wyświetlana, którą sam podajesz przy pierwszym uruchomieniu,</li>
       <li>pinezki i notatki na mapie,</li>
       <li>wyniki gier,</li>
@@ -56,18 +56,20 @@
       źródeł, na których zostały oparte.</li>
     </ul>
     <p>Rozmowy z Przewodnikiem <strong>przeżywają wyjście z grupy</strong> — nie są
-    częścią sesji i zakończenie jej ich nie kasuje. Usuwasz je tak samo jak resztę:
-    odinstalowaniem aplikacji lub wyczyszczeniem jej danych.</p>
-    <p>Osobno, poza tą bazą, w <strong>prywatnej pamięci aplikacji</strong> (katalog
-    niedostępny dla innych aplikacji, ale bez dodatkowego szyfrowania):</p>
+    częścią sesji, więc nie kasuje ich ani zakończenie sesji, ani wiersz <em>Usuń dane
+    z tego telefonu</em> (§7). Pojedynczą rozmowę usuniesz na liście Przewodnika
+    (<em>Usuń rozmowę</em>), wszystkie naraz — odinstalowaniem aplikacji lub
+    wyczyszczeniem jej danych.</p>
+    <p>Osobno, w <strong>prywatnej pamięci aplikacji</strong> (katalog niedostępny dla
+    innych aplikacji, ale bez dodatkowego szyfrowania):</p>
     <ul>
+      <li>pełne zdjęcia wysłane i odebrane w grupie — są za duże, żeby trzymać je
+      w bazie,</li>
       <li>podpis zdjęcia, które właśnie wysyłasz — leży niezaszyfrowany w pliku
       <code>media/pending_photos.json</code>, żeby wysyłka przetrwała zamknięcie aplikacji
       przez system w czasie robienia zdjęcia; wpis znika po wysłaniu zdjęcia,
       a porzucony traci ważność po 24 godzinach,</li>
-      <li><strong>pobrane przez Ciebie materiały</strong>: mapy offline, paczki wiedzy
-      Przewodnika i jego model. To treść, którą pobierasz, a nie dane o Tobie — nie
-      zawierają niczego, co powstało z Twojego użycia aplikacji.</li>
+      <li>pobrane paczki: mapy offline oraz modele i paczki wiedzy asystenta.</li>
     </ul>
     <p>Dziennik diagnostyczny (informacje techniczne o połączeniu — patrz §5) leży
     w katalogu <code>Android/data/pl.haskelar.alwaysintouch/files/logs</code>. Inne aplikacje
@@ -84,15 +86,25 @@
     <ul>
       <li>wiadomości i zdjęcia,</li>
       <li>nazwę wyświetlaną,</li>
-      <li>Twoją pozycję na mapie grupy, jeśli włączysz jej udostępnianie,</li>
       <li>pinezki i wyniki gier.</li>
     </ul>
-    <p><strong>Udostępnianie pozycji nie ma stanu domyślnego ani trybu ciągłego.</strong>
-    Każde udostępnienie jest osobną, jawną decyzją: wybierasz, jak często pozycja ma
-    być wysyłana i przez jaki czas — <strong>najdłużej cztery godziny</strong> — po czym
-    wygasa samo. Pozycje <strong>nie są zapisywane na żadnym urządzeniu</strong>: ani
-    Twoja u innych, ani cudze u Ciebie. Żyją w pamięci działającej aplikacji i znikają
-    razem z sesją.</p>
+    <p><strong>Twoja pozycja na mapie nie jest wysyłana nikomu, dopóki sam tego nie
+    zrobisz.</strong> Możesz udostępnić ją grupie i za każdym razem jest to Twoja jawna
+    decyzja — nie ma trybu domyślnego ani „zgody na zawsze”:</p>
+    <ul>
+      <li>udostępnianie ma <strong>okno</strong> (15 min, 1 godz. albo 4 godz.)
+      i <strong>odstęp między aktualizacjami</strong>, oba wybierasz Ty; nie ma opcji
+      „bez końca”,</li>
+      <li><strong>gaśnie samo</strong> po upływie okna, a przerwać je możesz w każdej
+      chwili,</li>
+      <li>gdy je włączysz, powiadomienie aplikacji mówi o tym wprost, a na ekranie widać
+      pasek z odliczaniem i przyciskiem „Zakończ”,</li>
+      <li><strong>żadna pozycja — ani Twoja, ani cudza — nie jest zapisywana na
+      dysku.</strong> Współrzędne żyją w pamięci działającej aplikacji i znikają razem
+      z nią; cudza kropka wygasa sama, gdy przestaje przychodzić świeża,</li>
+      <li>pozycja nie trafia też do dziennika diagnostycznego (jedynym wyjątkiem jest
+      plik CSV pomiaru zasięgu, który tworzysz świadomie w Diagnostyce).</li>
+    </ul>
     <p>Ruch między urządzeniami jest szyfrowany. Nie przechodzi przez żaden serwer
     pośredniczący ani przez internet — odbywa się w obrębie sieci lokalnej lub łącza
     Bluetooth.</p>
@@ -109,13 +121,15 @@
         <tr>
           <td><strong>Lokalizacja</strong> (dokładna i przybliżona)</td>
           <td>Wymagana przez Androida do postawienia lokalnego hotspotu
-          (<code>LocalOnlyHotspot</code>) — bez niej sesja grupowa nie ruszy. Dodatkowo
-          pokazuje Twoją pozycję na mapie grupy, jeśli sam to włączysz.</td>
+          (<code>LocalOnlyHotspot</code>) — bez niej sesja grupowa nie ruszy. Pokazuje też
+          Twoją własną pozycję na Twojej mapie i — <strong>tylko gdy sam to włączysz</strong>
+          — pozwala udostępnić ją grupie na wybrany czas.</td>
         </tr>
         <tr>
           <td><strong>Aparat</strong></td>
-          <td>Skanowanie kodu QR przy dołączaniu do grupy oraz robienie zdjęć wysyłanych
-          do grupy.</td>
+          <td>Skanowanie kodu QR przy dołączaniu do grupy, robienie zdjęć wysyłanych
+          do grupy oraz tłumaczenie tekstu z podglądu aparatu (rozpoznawanie tekstu
+          odbywa się w całości na urządzeniu — obraz nigdzie nie jest wysyłany).</td>
         </tr>
         <tr>
           <td><strong>Bluetooth</strong> (skanowanie, ogłaszanie, łączenie)</td>
@@ -134,13 +148,10 @@
         <tr>
           <td><strong>Usługa pierwszoplanowa / wyłączenie optymalizacji baterii</strong></td>
           <td>Utrzymanie połączenia z urządzeniami w grupie, gdy ekran jest zgaszony.
-          Bez tego system usypia proces i grupa traci łączność.</td>
-        </tr>
-        <tr>
-          <td><strong>Podłączona płytka radiowa</strong> (USB)</td>
-          <td>Tryb dalekiego zasięgu, jeśli podłączysz własną płytkę. Zgody na dostęp
-          do konkretnego urządzenia udziela system przy podłączeniu. Bez płytki
-          uprawnienie nie jest do niczego używane.</td>
+          Bez tego system usypia proces i grupa traci łączność. Usługa jest zadeklarowana
+          także z typem „lokalizacja”, bo bez tego udostępnianie pozycji przestaje działać
+          z telefonem w kieszeni — <strong>odczyt następuje wyłącznie w oknie, które sam
+          otworzyłeś</strong>. Nie prosimy o uprawnienie „lokalizacja w tle”.</td>
         </tr>
         <tr>
           <td><strong>Internet</strong></td>
@@ -156,8 +167,9 @@
     idą do OpenStreetMap — patrz §4 punkt 2.</p>
 
     <h2>4. Jedyne połączenia z internetem</h2>
-    <p>Aplikacja jest zaprojektowana do działania bez internetu. Łączy się z siecią
-    w pięciu sytuacjach, wszystkich zwykle <strong>przed wyjazdem</strong>:</p>
+    <p>Aplikacja jest zaprojektowana do działania bez internetu. Sieci używa wyłącznie
+    do <strong>przygotowania się przed wyjazdem</strong> i do obsługi zakupu — nigdy do
+    przenoszenia tego, co dzieje się w grupie. Pełna lista:</p>
     <ol>
       <li><strong>RevenueCat</strong> — obsługa zakupu i weryfikacja wykupionego planu.
       RevenueCat otrzymuje anonimowy identyfikator urządzenia (w postaci
@@ -170,27 +182,30 @@
       obszaru — <strong>współrzędne środka tego obszaru</strong> (z dokładnością do poziomu
       miasta). Nie jest to Twoja pozycja GPS, tylko fragment mapy, który sam oglądasz.
       <a href="https://osmfoundation.org/wiki/Privacy_Policy" rel="noopener">osmfoundation.org</a></li>
-      <li><strong>Serwer kafli mapowych</strong> — pobranie paczki mapy offline wybranego
-      obszaru.</li>
-      <li><strong><code>packs.haskelar.pl</code></strong> (Cloudflare R2, nasz adres) —
-      pobranie katalogu materiałów oraz tego, co z niego wybierzesz: paczek wiedzy
-      Przewodnika i jego modelu. Serwer otrzymuje standardowe dane połączenia (adres IP,
-      nagłówki przeglądarki plików) i informację o tym, który plik pobierasz.
-      <strong>Nie wysyłamy tam Twojego imienia, treści rozmów, pytań do Przewodnika
-      ani lokalizacji.</strong> Katalog jest podpisany kluczem wydawcy i aplikacja
-      odrzuca go, jeśli podpis się nie zgadza.</li>
+      <li><strong>Serwer kafli mapowych</strong> (Protomaps / OpenStreetMap) — pobranie
+      fragmentu mapy offline wybranego obszaru.</li>
+      <li><strong>Cloudflare</strong> (<code>packs.haskelar.pl</code>) — katalog paczek
+      wydawcy i samo pobieranie paczek (treści przewodnika). Cloudflare widzi przy tym
+      Twój adres IP i to, jaki plik pobierasz, jak przy każdym pobieraniu ze strony
+      internetowej; magazyn należy do wydawcy aplikacji. Katalog jest podpisany
+      kryptograficznie i aplikacja odrzuca paczkę, której podpis albo suma kontrolna się
+      nie zgadza — pobranie z serwera wydawcy <strong>nie</strong> znaczy, że aplikacja
+      ufa temu, co stamtąd przyszło. Do 04.08.2026 rolę tę pełnił GitHub
+      (<code>raw.githubusercontent.com</code>).</li>
       <li><strong>Usługi Google Play (ML Kit)</strong> — pobranie pakietów językowych
-      tłumacza. Pobieranie prowadzi Google na Twoim urządzeniu; do Google trafia
-      informacja o tym, który pakiet językowy pobierasz, wraz ze standardowymi danymi
-      Twojego konta Google i urządzenia. <strong>Samo tłumaczenie odbywa się później
-      wyłącznie na telefonie</strong> — tłumaczony tekst nigdzie nie jest wysyłany.
-      Biblioteka ML Kit wysyła też do Google zbiorcze dane diagnostyczne i statystyki
+      tłumacza offline. Pobieranie inicjuje aplikacja, ale prowadzą je Usługi Google Play
+      na Twoim urządzeniu; przekazywana jest informacja o tym, jaki pakiet językowy jest
+      pobierany. <strong>Samo tłumaczenie i rozpoznawanie tekstu odbywa się później
+      w całości offline</strong> — teksty, zdjęcia i obraz z aparatu nigdy nie opuszczają
+      urządzenia. Biblioteka ML Kit wysyła też do Google zbiorcze dane diagnostyczne i statystyki
       użycia (informacje o urządzeniu i aplikacji, identyfikator instalacji, metryki
       wydajności, kody błędów) — nigdy treści tłumaczeń ani obrazu.
       <a href="https://policies.google.com/privacy" rel="noopener">policies.google.com/privacy</a></li>
     </ol>
     <p>Poza tymi pięcioma przypadkami aplikacja nie wysyła niczego do internetu.
-    W szczególności <strong>nie zawiera reklam ani własnych narzędzi analitycznych</strong>.</p>
+    W szczególności <strong>nie zawiera reklam ani własnych narzędzi analitycznych</strong>,
+    a treść rozmów, zdjęcia i wyniki gier nie mają żadnej drogi na zewnątrz urządzenia
+    poza bezpośrednim łączem do telefonów Twojej grupy (§2).</p>
 
     <h2>5. Dziennik diagnostyczny</h2>
     <p>Aplikacja prowadzi lokalny dziennik techniczny (stan połączeń, błędy), który pomaga
