@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Privacy Policy — AlwaysInTouch</title>
-<meta name="description" content="Privacy policy for AlwaysInTouch — a serverless messenger with no user accounts, no ads and no analytics.">
+<meta name="description" content="Privacy policy for AlwaysInTouch — a serverless messenger with no user accounts, no ads and no analytics of our own.">
 <link rel="canonical" href="https://haskelar.pl/privacy/">
 <link rel="alternate" hreflang="pl" href="https://haskelar.pl/polityka-prywatnosci/">
 <link rel="alternate" hreflang="en" href="https://haskelar.pl/privacy/">
@@ -29,7 +29,7 @@
     <h1>Privacy Policy</h1>
     <p class="meta">
       <strong>App</strong>: AlwaysInTouch (<code>pl.haskelar.alwaysintouch</code>)<br>
-      <strong>Last updated</strong>: 19 August 2026
+      <strong>Last updated</strong>: 22 September 2026
     </p>
 
     <div class="card tldr">
@@ -52,16 +52,25 @@
       <li>map pins and notes,</li>
       <li>game scores,</li>
       <li>Guide conversations — your questions, the answers, and the trimmed source
-      passages they were built from,</li>
-      <li>the diagnostic log (technical connection information — see §5).</li>
+      passages they were built from.</li>
     </ul>
     <p>Guide conversations <strong>survive leaving a group</strong> — they are not part of
     a session, and ending one does not erase them. You delete them the same way as
     everything else: by uninstalling the app or clearing its data.</p>
-    <p>Separately, outside that database, the app's folder holds <strong>the material you
-    downloaded</strong>: offline maps, the Guide's knowledge packs and its model. That is
-    content you fetched, not data about you — none of it is produced by your use of
-    the app.</p>
+    <p>Separately, outside that database, in the app's <strong>private storage</strong> (a folder
+    other apps cannot access, but without additional encryption):</p>
+    <ul>
+      <li>The caption of a photo you are sending right now sits unencrypted in the file
+      <code>media/pending_photos.json</code>, so that sending survives the system closing
+      the app while the camera is open; the entry is removed once the photo is sent, and
+      an abandoned one expires after 24 hours.</li>
+      <li><strong>The material you downloaded</strong>: offline maps, the Guide's knowledge
+      packs and its model. That is content you fetched, not data about you — none of it is
+      produced by your use of the app.</li>
+    </ul>
+    <p>The diagnostic log (technical connection information — see §5) is kept in the folder
+    <code>Android/data/pl.haskelar.alwaysintouch/files/logs</code>. Other apps cannot access
+    it, but it can be read by connecting the phone to a computer with a cable.</p>
     <p>Android backup is <strong>disabled</strong> for this app
     (<code>allowBackup="false"</code>), so this data is never copied to Google Drive.</p>
     <p>Uninstalling the app deletes it irreversibly. We hold no copy of it and cannot
@@ -138,21 +147,26 @@
       </tbody>
     </table>
     </div>
-    <p>Your location is <strong>never sent</strong> to us or to any third party. It goes only
-    to the members of your group, and only when you enable location sharing yourself.</p>
+    <p>Your location <strong>is never sent</strong> to us or to any third party. It goes only
+    to the members of your group, and only when you turn on position sharing yourself (§2).
+    A separate, explicit case: when you ask the offline map wizard for the name of an area
+    you selected, the coordinates of that area (not your position) go to OpenStreetMap —
+    see §4, item 2.</p>
 
     <h2>4. The only internet connections</h2>
     <p>The app is designed to work without an internet connection. It reaches the network in
     five situations, all of them typically <strong>before you set off</strong>:</p>
     <ol>
-      <li><strong>RevenueCat</strong> — handling the purchase and verifying an active Pro
-      subscription. RevenueCat receives an anonymous device identifier (in the form
+      <li><strong>RevenueCat</strong> — handling the purchase and verifying the plan you
+      bought. RevenueCat receives an anonymous device identifier (in the form
       <code>$RCAnonymousID:…</code>), purchase details and standard technical connection data.
       <strong>We do not send it your name, your conversations or your location.</strong>
       RevenueCat's privacy policy:
       <a href="https://www.revenuecat.com/privacy" rel="noopener">revenuecat.com/privacy</a></li>
-      <li><strong>Nominatim (OpenStreetMap)</strong> — searching for places in the offline map
-      wizard. The search term you type is sent.
+      <li><strong>Nominatim (OpenStreetMap)</strong> — the offline map wizard. The search term you
+      type is sent, and when the wizard suggests a name for the area being downloaded — the
+      <strong>coordinates of the centre of that area</strong> (to roughly city-level
+      precision). This is not your GPS position, only the piece of the map you are looking at.
       <a href="https://osmfoundation.org/wiki/Privacy_Policy" rel="noopener">osmfoundation.org</a></li>
       <li><strong>Map tile server</strong> — downloading the offline map package for the area
       you select.</li>
@@ -167,15 +181,20 @@
       language packs. The download is carried out by Google on your device; Google receives
       which language pack you are downloading, along with the standard data of your Google
       account and device. <strong>The translation itself then happens on the phone alone</strong>
-      — the text being translated is never sent anywhere.
+      — the text being translated is never sent anywhere. The ML Kit library also sends
+      Google aggregated diagnostic data and usage statistics (device and app information,
+      an installation identifier, performance metrics, error codes) — never the content of
+      translations or images.
       <a href="https://policies.google.com/privacy" rel="noopener">policies.google.com/privacy</a></li>
     </ol>
     <p>Outside these five cases the app sends nothing to the internet. In particular, it
-    <strong>contains no advertising and no analytics tooling</strong>.</p>
+    <strong>contains no advertising and no analytics tooling of our own</strong>.</p>
 
     <h2>5. Diagnostic log</h2>
     <p>The app keeps a local technical log (connection state, errors) that helps diagnose
-    connectivity problems. It lives in the app's directory on your device and is
+    connectivity problems. It lives on your device, in the folder
+    <code>Android/data/pl.haskelar.alwaysintouch/files/logs</code> (other apps cannot access
+    it, but it can be read by connecting the phone to a computer with a cable), and is
     <strong>never sent anywhere automatically</strong>.</p>
     <p>You can export it and send it to us yourself from the <em>Diagnostics</em> screen —
     this happens solely on your initiative and under your control. The log may contain Wi-Fi
@@ -190,7 +209,9 @@
     <strong>there is no account to delete</strong> and no dataset for which a copy could
     be requested.</p>
     <p>You delete local data by uninstalling the app or clearing its data in the system
-    settings.</p>
+    settings. You can also delete the group's conversations, photos, map pins and game
+    scores without uninstalling — in the app's <em>Settings</em>, with the <em>Delete data
+    from this phone</em> row.</p>
     <p>Purchase data is held by RevenueCat and in your Google Play account — for those
     matters, refer to the policies of those services.</p>
 

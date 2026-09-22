@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Polityka prywatności — AlwaysInTouch</title>
-<meta name="description" content="Polityka prywatności aplikacji AlwaysInTouch — komunikatora działającego bez serwera, bez kont użytkowników i bez narzędzi analitycznych.">
+<meta name="description" content="Polityka prywatności aplikacji AlwaysInTouch — komunikatora działającego bez serwera, bez kont użytkowników i bez własnych narzędzi analitycznych.">
 <link rel="canonical" href="https://haskelar.pl/polityka-prywatnosci/">
 <link rel="alternate" hreflang="pl" href="https://haskelar.pl/polityka-prywatnosci/">
 <link rel="alternate" hreflang="en" href="https://haskelar.pl/privacy/">
@@ -29,7 +29,7 @@
     <h1>Polityka prywatności</h1>
     <p class="meta">
       <strong>Aplikacja</strong>: AlwaysInTouch (<code>pl.haskelar.alwaysintouch</code>)<br>
-      <strong>Ostatnia aktualizacja</strong>: 19 sierpnia 2026
+      <strong>Ostatnia aktualizacja</strong>: 22 września 2026
     </p>
 
     <div class="card tldr">
@@ -53,16 +53,26 @@
       <li>pinezki i notatki na mapie,</li>
       <li>wyniki gier,</li>
       <li>rozmowy z Przewodnikiem — Twoje pytania, odpowiedzi i przycięte fragmenty
-      źródeł, na których zostały oparte,</li>
-      <li>dziennik diagnostyczny (informacje techniczne o połączeniu — patrz §5).</li>
+      źródeł, na których zostały oparte.</li>
     </ul>
     <p>Rozmowy z Przewodnikiem <strong>przeżywają wyjście z grupy</strong> — nie są
     częścią sesji i zakończenie jej ich nie kasuje. Usuwasz je tak samo jak resztę:
     odinstalowaniem aplikacji lub wyczyszczeniem jej danych.</p>
-    <p>Osobno, poza tą bazą, w katalogu aplikacji leżą <strong>pobrane przez Ciebie
-    materiały</strong>: mapy offline, paczki wiedzy Przewodnika i jego model.
-    To treść, którą pobierasz, a nie dane o Tobie — nie zawierają niczego, co
-    powstało z Twojego użycia aplikacji.</p>
+    <p>Osobno, poza tą bazą, w <strong>prywatnej pamięci aplikacji</strong> (katalog
+    niedostępny dla innych aplikacji, ale bez dodatkowego szyfrowania):</p>
+    <ul>
+      <li>podpis zdjęcia, które właśnie wysyłasz — leży niezaszyfrowany w pliku
+      <code>media/pending_photos.json</code>, żeby wysyłka przetrwała zamknięcie aplikacji
+      przez system w czasie robienia zdjęcia; wpis znika po wysłaniu zdjęcia,
+      a porzucony traci ważność po 24 godzinach,</li>
+      <li><strong>pobrane przez Ciebie materiały</strong>: mapy offline, paczki wiedzy
+      Przewodnika i jego model. To treść, którą pobierasz, a nie dane o Tobie — nie
+      zawierają niczego, co powstało z Twojego użycia aplikacji.</li>
+    </ul>
+    <p>Dziennik diagnostyczny (informacje techniczne o połączeniu — patrz §5) leży
+    w katalogu <code>Android/data/pl.haskelar.alwaysintouch/files/logs</code>. Inne aplikacje
+    nie mają do niego dostępu, ale można go odczytać po podłączeniu telefonu kablem
+    do komputera.</p>
     <p>Kopia zapasowa Androida jest dla tej aplikacji <strong>wyłączona</strong>
     (<code>allowBackup="false"</code>), więc dane te nie trafiają na Dysk Google.</p>
     <p>Odinstalowanie aplikacji usuwa je nieodwracalnie. Nie mamy ich kopii i nie jesteśmy
@@ -141,20 +151,24 @@
     </div>
     <p>Lokalizacja <strong>nie jest wysyłana</strong> do nas ani do żadnej strony trzeciej.
     Trafia wyłącznie do uczestników Twojej grupy i tylko wtedy, gdy sam włączysz
-    udostępnianie pozycji.</p>
+    udostępnianie pozycji (§2). Osobny, jawny przypadek: gdy w kreatorze mapy offline
+    poprosisz o nazwę wskazanego obszaru, współrzędne tego obszaru (nie Twoja pozycja)
+    idą do OpenStreetMap — patrz §4 punkt 2.</p>
 
     <h2>4. Jedyne połączenia z internetem</h2>
     <p>Aplikacja jest zaprojektowana do działania bez internetu. Łączy się z siecią
     w pięciu sytuacjach, wszystkich zwykle <strong>przed wyjazdem</strong>:</p>
     <ol>
-      <li><strong>RevenueCat</strong> — obsługa zakupu i weryfikacja aktywnej subskrypcji Pro.
+      <li><strong>RevenueCat</strong> — obsługa zakupu i weryfikacja wykupionego planu.
       RevenueCat otrzymuje anonimowy identyfikator urządzenia (w postaci
       <code>$RCAnonymousID:…</code>), informacje o zakupie oraz standardowe dane techniczne
       połączenia. <strong>Nie przekazujemy tam Twojego imienia, treści rozmów ani
       lokalizacji.</strong> Polityka prywatności RevenueCat:
       <a href="https://www.revenuecat.com/privacy" rel="noopener">revenuecat.com/privacy</a></li>
-      <li><strong>Nominatim (OpenStreetMap)</strong> — wyszukiwanie miejsc w kreatorze map
-      offline. Wysyłane jest wpisane przez Ciebie hasło wyszukiwania.
+      <li><strong>Nominatim (OpenStreetMap)</strong> — kreator map offline. Wysyłane jest wpisane
+      przez Ciebie hasło wyszukiwania, a przy podpowiadaniu nazwy dla pobieranego
+      obszaru — <strong>współrzędne środka tego obszaru</strong> (z dokładnością do poziomu
+      miasta). Nie jest to Twoja pozycja GPS, tylko fragment mapy, który sam oglądasz.
       <a href="https://osmfoundation.org/wiki/Privacy_Policy" rel="noopener">osmfoundation.org</a></li>
       <li><strong>Serwer kafli mapowych</strong> — pobranie paczki mapy offline wybranego
       obszaru.</li>
@@ -170,15 +184,20 @@
       informacja o tym, który pakiet językowy pobierasz, wraz ze standardowymi danymi
       Twojego konta Google i urządzenia. <strong>Samo tłumaczenie odbywa się później
       wyłącznie na telefonie</strong> — tłumaczony tekst nigdzie nie jest wysyłany.
+      Biblioteka ML Kit wysyła też do Google zbiorcze dane diagnostyczne i statystyki
+      użycia (informacje o urządzeniu i aplikacji, identyfikator instalacji, metryki
+      wydajności, kody błędów) — nigdy treści tłumaczeń ani obrazu.
       <a href="https://policies.google.com/privacy" rel="noopener">policies.google.com/privacy</a></li>
     </ol>
     <p>Poza tymi pięcioma przypadkami aplikacja nie wysyła niczego do internetu.
-    W szczególności <strong>nie zawiera reklam ani narzędzi analitycznych</strong>.</p>
+    W szczególności <strong>nie zawiera reklam ani własnych narzędzi analitycznych</strong>.</p>
 
     <h2>5. Dziennik diagnostyczny</h2>
     <p>Aplikacja prowadzi lokalny dziennik techniczny (stan połączeń, błędy), który pomaga
-    zdiagnozować problemy z łącznością. Leży on w katalogu aplikacji na Twoim urządzeniu
-    i <strong>nie jest nigdzie wysyłany automatycznie</strong>.</p>
+    zdiagnozować problemy z łącznością. Leży on na Twoim urządzeniu,
+    w katalogu <code>Android/data/pl.haskelar.alwaysintouch/files/logs</code> (inne aplikacje
+    nie mają do niego dostępu, ale można go odczytać po podłączeniu telefonu kablem
+    do komputera), i <strong>nie jest nigdzie wysyłany automatycznie</strong>.</p>
     <p>Możesz go wyeksportować i przesłać nam samodzielnie z ekranu <em>Diagnostyka</em> —
     dzieje się to wyłącznie z Twojej inicjatywy i pod Twoją kontrolą. Dziennik może zawierać
     nazwy sieci Wi-Fi i nazwy wyświetlane uczestników; nie zawiera treści wiadomości.</p>
@@ -192,7 +211,9 @@
     serwerach, <strong>nie ma konta, które można by usunąć</strong>, ani zbioru danych,
     o którego kopię można by wystąpić.</p>
     <p>Dane lokalne usuwasz, odinstalowując aplikację lub czyszcząc jej dane w ustawieniach
-    systemu.</p>
+    systemu. Rozmowy, zdjęcia, pinezki i wyniki gier grupy usuniesz też bez
+    odinstalowania — w <em>Ustawieniach</em> aplikacji, wierszem <em>Usuń dane z tego
+    telefonu</em>.</p>
     <p>Dane o zakupie znajdują się w RevenueCat i w Twoim koncie Google Play — w tych
     sprawach kieruj się politykami tych usług.</p>
 
