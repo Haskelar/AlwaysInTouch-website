@@ -48,12 +48,14 @@
     <ul>
       <li>the content of text messages,</li>
       <li>photo thumbnails,</li>
-      <li>the display name you choose on first launch,</li>
       <li>map pins and notes,</li>
       <li>game scores,</li>
       <li>Guide conversations — your questions, the answers, and the trimmed source
       passages they were built from.</li>
     </ul>
+    <p>The display name you choose on first launch is kept outside that database —
+    in the app’s encrypted storage, whose key is also protected by the Keystore.
+    The database holds it too, as the signature on your messages.</p>
     <p>Guide conversations <strong>survive leaving a group</strong> — they are not part of
     a session, so neither ending the session nor the <em>Delete data from this phone</em>
     row (§7) erases them. You delete a single conversation from the Guide list
@@ -87,6 +89,11 @@
       <li>your display name,</li>
       <li>map pins and game scores.</li>
     </ul>
+    <p>You can delete your own message: its text is then erased on the phones of the
+    group’s members. A photo that has already reached someone stays on their
+    phone, though — deleting the message removes neither the thumbnail nor the
+    full-size photo file. A phone that is no longer in the group does not receive
+    the deletion.</p>
     <p><strong>Your position on the map is sent to no one until you do it yourself.</strong>
     You can share it with the group, and every time it is your explicit decision — there is
     no default mode and no “consent forever”:</p>
