@@ -1,3 +1,14 @@
+Ta licencja obejmuje wszystkie kroje w tym katalogu — rodzinę IBM Plex
+(© 2017–2018 IBM Corp.):
+
+  IBM Plex Serif 600         ibm-plex-serif-600-*.woff2   (nagłówki: style.css i wizytowka.css)
+  IBM Plex Sans 400 i 600    ibm-plex-sans-*.woff2        (strona główna, wizytowka.css)
+  IBM Plex Mono 400          ibm-plex-mono-*.woff2        (strona główna, wizytowka.css)
+
+Pliki pochodzą z pakietów @fontsource (podzbiory latin i latin-ext), bez zmian.
+
+-----------------------------------------------------------
+
 Copyright © 2017 IBM Corp. with Reserved Font Name "Plex"
 
 This Font Software is licensed under the SIL Open Font License, Version 1.1.

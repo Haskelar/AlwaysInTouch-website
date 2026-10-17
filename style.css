@@ -1,4 +1,6 @@
-/* Styl haskelar.pl.
+/* Styl podstron haskelar.pl: polityk prywatności i strony 404.
+ *
+ * Strona główna ma własny arkusz, wizytowka.css, i z tego nie korzysta.
  *
  * Wspólny język wizualny z ait.haskelar.pl — tokeny pochodzą z motywu aplikacji
  * AlwaysInTouch („papier + atrament"). Wzorcem jest serwer/www/ait/style.css
@@ -66,8 +68,7 @@
   --screen: 24px;
   --touch: 48px;
 
-  /* Dokumenty prawne czyta się w jednej wąskiej kolumnie; strona główna
-   * rozpycha .wrap do 58rem osobną regułą na dole. */
+  /* Dokumenty prawne czyta się w jednej wąskiej kolumnie. */
   --maxw: 44rem;
 
   --serif: 'IBM Plex Serif', Georgia, 'Times New Roman', serif;
@@ -282,123 +283,3 @@ td:first-child { white-space: nowrap; }
   outline: 2px solid var(--accent);
   outline-offset: 2px;
   border-radius: 2px;
-}
-
-/* ==========================================================================
-   Strona główna — wizytówka autora.
-
-   Wszystko poniżej dotyczy WYŁĄCZNIE index.html i 404. Podstrony z polityką
-   prywatności korzystają z klas powyżej i nie wolno ich ruszać: ich adresy
-   są wpisane w Play Console, a treść jest dokumentem prawnym.
-
-   Kolumna rośnie tu do 58rem, bo lista projektów ma po prawej stronie drugą,
-   węższą szpaltę z nazwami narzędzi.
-   ========================================================================== */
-
-body.glowna .wrap { max-width: 58rem; }
-
-/* ---------------------------------------------------------------- otwarcie */
-
-.hero { padding: var(--sp-xxl) 0 0; }
-
-.hero .kto {
-  display: inline-block;
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.8px;
-  text-transform: uppercase;
-  color: var(--accent-text);
-  margin-bottom: var(--sp-md);
-}
-
-.hero h1 {
-  font-size: clamp(34px, 6.4vw, 56px);
-  line-height: 1.03;
-  letter-spacing: -0.025em;
-  margin: 0 0 var(--sp-md);
-  max-width: 16ch;
-}
-
-.hero .lead {
-  font-size: clamp(17px, 2.2vw, 20px);
-  line-height: 1.45;
-  max-width: 52ch;
-  margin-bottom: var(--sp-lg);
-}
-
-.hero-akcje { display: flex; flex-wrap: wrap; gap: var(--sp-sm); }
-
-.przycisk {
-  display: inline-flex;
-  align-items: center;
-  min-height: var(--touch);         /* cel dotykowy — WCAG 2.5.5 */
-  padding: 0 var(--sp-lg);
-  border-radius: var(--radius);
-  border: 1px solid var(--hairline);
-  color: var(--ink);
-  font-size: 15px;
-  font-weight: 600;
-  text-decoration: none;
-}
-
-.przycisk:hover { border-color: var(--brand); color: var(--brand-pressed); }
-
-.przycisk.mocny {
-  background: var(--brand);
-  border-color: var(--brand);
-  color: var(--on-brand);
-}
-
-.przycisk.mocny:hover { background: var(--brand-pressed); color: var(--on-brand); }
-
-/* ---------------------------------------------------------------- sekcje */
-
-.sekcja {
-  border-top: 1px solid var(--hairline);
-  padding-top: var(--sp-xl);
-  margin-top: var(--sp-huge);
-}
-
-.sekcja > h2 { margin-top: 0; }
-
-/* ---------------------------------------------------------------- roboty
- *
- * Lista projektów. Każdy to nazwa, jedno zdanie po ludzku i — z boku, drobnym
- * drukiem — nazwy narzędzi. Kto zna, ten sprawdzi; kto nie zna, ten minie
- * i nic nie traci. */
-
-.roboty { list-style: none; padding: 0; margin: var(--sp-lg) 0 0; }
-
-.roboty > li {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--sp-xs) var(--sp-xl);
-  padding: var(--sp-lg) 0;
-  margin: 0;
-  border-top: 1px solid var(--hairline);
-}
-
-.roboty > li:first-child { border-top: 0; padding-top: 0; }
-
-@media (min-width: 44rem) {
-  .roboty > li { grid-template-columns: minmax(0, 1fr) 13rem; }
-  .roboty .narzedzia { grid-row: span 2; text-align: right; }
-}
-
-.roboty h3 {
-  font-family: var(--serif);
-  font-size: 22px;
-  line-height: 1.2;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  margin: 0;
-}
-
-.roboty p { margin: 0; color: var(--ink-secondary); max-width: 52ch; }
-
-.narzedzia {
-  font-size: 13px;
-  letter-spacing: 0.4px;
-  color: var(--ink-secondary);
-  align-self: start;
-}
