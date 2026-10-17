@@ -22,7 +22,7 @@ GitHub Pages.
 | `privacy/index.html` | privacy policy EN |
 | `404.html` | strona błędu |
 | `style.css` | style polityk prywatności i 404 |
-| `fonts/` | IBM Plex Serif 600, Sans 400/600, Mono 400 (latin + latin-ext) i licencja OFL |
+| `fonts/` | IBM Plex Serif 600 (polityki, 404), Sans 400/600 i Mono 500 (strona główna); latin + latin-ext, licencja OFL |
 | `CNAME` | domena własna GitHub Pages |
 
 ## Trzy rzeczy, o których trzeba pamiętać
@@ -36,7 +36,8 @@ w `style.css` nie wolno usuwać ani przemianowywać. Przemalować wolno.
 `style.css` pochodzą z motywu aplikacji; wzorcem jest `serwer/www/ait/style.css`
 w drugim repozytorium (prywatnym). Po zmianie czegokolwiek w palecie zajrzyj
 tam, żeby strony nie rozjechały się między sobą. Strona główna ma własny,
-ciemny wygląd w `wizytowka.css` i z ait wspólny jest tylko krój nagłówków.
+ciemny wygląd w `wizytowka.css` (IBM Plex Sans i Mono) i nie dzieli palety
+z ait.
 
 **Treść strony głównej pochodzi z CV.** Liczby i fakty nie są dopisywane
 „na oko” — każda zmiana powinna mieć pokrycie w aktualnym CV.
